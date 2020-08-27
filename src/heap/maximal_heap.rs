@@ -1,22 +1,22 @@
-pub struct MaximalHeap {
-    data: Vec<i32>,
+pub struct MaximalHeap<T> {
+    data: Vec<T>,
 }
 
-impl MaximalHeap {
-    pub fn new() -> MaximalHeap {
+impl<T:PartialOrd+PartialEq+Copy> MaximalHeap<T> {
+    pub fn new() -> MaximalHeap<T> {
         MaximalHeap { data: Vec::new() }
     }
 
-    pub fn insert(&mut self, d: i32) {
+    pub fn insert(&mut self, d: T) {
         self.data.push(d);
         self.bubble_up(self.data.len() - 1);
     }
 
-    pub fn extact_max(&mut self) -> Option<i32> {
+    pub fn extact_max(&mut self) -> Option<T> {
         if self.data.len() == 0 {
             return None;
         };
-
+        
         let res = self.data[0];
         if self.data.len() != 1 {
             self.data[0] = self.data.pop().unwrap();
